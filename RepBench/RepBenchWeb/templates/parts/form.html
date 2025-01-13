@@ -1,0 +1,106 @@
+{#<style>#}
+{#     .disabled {#}
+{#        opacity: 0.5; /* Reduce opacity to indicate disabled state */#}
+{#        cursor: not-allowed; /* Change cursor to indicate non-interactivity */#}
+{#        /* Add any other styling you want for the disabled state */#}
+{#        pointer-events: none;#}
+{#     }#}
+{#</style>#}
+
+<form class="retrieveForm  inner-grid" enctype="multipart/form-data" id="{{ form_id }}"
+      onchange="return false"
+      onsubmit="return false" {% if style %} style='{{ style }}'{% endif %}>
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+        <div class="form-group {{ style.class }}">
+        {% if field.field.widget.input_type != 'checkbox' %}
+            <label>{{ field.label }}
+                {% if field.help_text %}
+                    <a tabindex="10" class="btn" role="button" data-toggle="kt-popover" data-placement="top"
+                       data-trigger="focus"
+                       data-content='{{ field.help_text }}'
+                       data-original-title="" title=""><i
+                            class="mdi mdi-information-outline mdi-18px"></i></a>
+                {% endif %}
+            </label>
+
+            {{ field }}
+        {% endif %}
+        {% if field.field.widget.input_type == 'checkbox' %}
+            <div class="accordion" id="seriesAccordion">
+            <div class="card dropdown">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
+                                style="background: rgba(0,0,0,.075); height:35px">
+                            <span>{{ field.label }}  <i class="fa fa-chevron-down"></i></span>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                     data-parent="#seriesAccordion" aria-expanded="false" style="height: 0px;">
+                    <div class="card-body" style="max-height: 150px; overflow: scroll;">
+                        <ul style="list-style: none;">
+                            {% for v,e in field.field.widget.choices %}
+                                <li>
+                                    <label> {{ e }}</label>
+                                    {% if forloop.counter0 == 0 %}
+                                        <input type="checkbox" name="{{ field.name }}" value="{{ v }}" checked>
+                                    {% else %}
+                                        <input type="checkbox" name="{{ field.name }}" value="{{ v }}">
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <button class="btn btn-primary {% if class %}{{ class }}{% endif %}"
+{#                {% if class %}#}
+{#                onclick="{{ onclick }}"#}
+{#                {% endif %}#}
+                {% if onclick %}
+                onclick="{{ onclick }}"
+                {% else %}
+                onclick="return false"
+                {% endif %}
+                {% if button_id %}
+                id="{{ button_id }}"
+                {% endif %}
+        >
+            {{ button_label|default:"Apply" }}
+        </button>
+    </div>
+    {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+</form>
+
+{#<style>#}
+{#    .help-icon {#}
+{#        display: inline-block;#}
+{#        position: relative;#}
+{#    }#}
+{##}
+{#    .help-icon:hover:after {#}
+{#        content: attr(title);#}
+{#        position: absolute;#}
+{#        top: 100%;#}
+{#        left: 50%;#}
+{#        transform: translate(-50%, -200%);#}
+{#        background-color: #fff;#}
+{#        color: black;#}
+{#        border: 1px solid #ccc;#}
+{#        padding: 5px;#}
+{#        z-index: 999;#}
+{#        font-size: 8px;#}
+{#        font-style: italic;#}
+{#    }#}
+{##}
+{#</style>#}

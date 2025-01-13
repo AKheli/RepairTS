@@ -1,0 +1,226 @@
+<script>
+
+
+    const bestPointSettings = {marker: {symbol: "diamond", zIndex: 1000, radius: 12}, color: "darkgreen"}
+    const defaultSettings = {marker: {symbol: "circle", radius: 6}, color: 'rgba(119, 152, 191,1)'}
+
+    const ErrorChart = {
+        html_id: "ErrorChart",
+        chart: Highcharts.chart("ErrorChart", {
+            chart: {
+                type: 'line',
+                height: 390,
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                allowDecimals: false,
+                title: {
+                    text: "Iteration"
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value + 1;
+                    },
+                },
+
+            },
+            yAxis: {
+                title: {
+                    text: "RMSE"
+                },
+                labels: {
+                    format: '{value}'
+                }
+            },
+            series: [{
+                name: 'Error',
+                data: [],
+                showInLegend: false
+            }]
+        }),
+        minScore: 10000000,
+        add: function (dataPoint) {
+            if (dataPoint === undefined) {
+                return
+            }
+            let isBest = false;
+
+            // reset color of last point and update best score
+            if (this.chart.series[0].data.length > 0) {
+                {#let lastPoint = this.chart.series[0].data[this.chart.series[0].data.length - 1];#}
+                {#lastPoint.update(defaultSettings);#}
+
+                //check if it has the lowest score (since we're tracking error)
+
+                console.log(dataPoint)
+                if (dataPoint < this.minScore) {
+                    this.minScore = dataPoint;
+                    isBest = true;
+                }
+            }
+
+            if (isBest) {
+                this.chart.series[0].data.forEach(d => {
+                    if (d.marker.symbol === "diamond") {
+                        d.update(defaultSettings, true, true);
+                    }
+                });
+                this.chart.series[0].addPoint({
+                    y: dataPoint,
+                    ...bestPointSettings,
+                });
+
+            } else {
+                this.chart.series[0].addPoint({
+                    y: dataPoint,
+                    ...defaultSettings,
+                });
+            }
+        },
+
+        clear: function () {
+            this.chart.series[0].setData([]);
+            this.minScore = 10000000;
+        }
+    }
+
+
+    const SuccessiveHalvingChart = {
+        html_id: "SucessiveHalvingChart",
+        param_1: '',
+        param_2: '',
+        minScore: 10000000,
+
+        chart: Highcharts.chart("SucessiveHalvingChart", {
+            chart: {
+                type: 'scatter',
+                height: 500,
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                scatter: {
+                    marker: {
+                        radius: 8 // Set the desired point size here
+                    }
+                }
+            },
+            title: {
+                text: "" //'Parameters Values'
+            },
+            xAxis: {
+                title: {
+                    text: "",
+                    style: {
+                        fontSize: '18px' // Set the desired font size here
+                    }
+                },
+                labels: {
+                    format: '{value} ',
+                },
+            },
+            yAxis: {
+                title: {
+                    text: "",
+                    style: {
+                        fontSize: '18px' // Set the desired font size here
+                    },
+                },
+                labels: {
+                    format: '{value}',
+                    style: {
+                        fontSize: '12px' // Set the desired font size here
+                    },
+                }
+            },
+            series: [{
+                name: 'Halvings',
+                data: [],
+                showInLegend: false
+            }, {
+                name: 'Optimum',
+                data: [],
+                lineWidth: 0,
+                ...bestPointSettings
+            },
+            ],
+
+            tooltip: {
+                headerFormat: '<b></b><br>',
+                pointFormat: '<b></b><br>score:{point.score}</b><br/>'
+            },
+        }),
+
+        update: function (data) {
+            let dataTuples = data.map(d => {
+                let value_1 = d[this.param_1]
+                let value_2 = d[this.param_2]
+                return [value_1, value_2]
+            })
+            this.chart.series[0].setData(dataTuples);
+        },
+
+        add: function (dataPoint, score) {
+            console.log(dataPoint, score)
+            let isBest = false
+            console.log(this.minScore)
+            if (score < this.minScore) {
+                isBest = true
+                this.minScore = score
+            }
+            console.log("IS BEST", isBest)
+            if (isBest) {
+                this.chart.series[this.chart.series.length - 1].data.forEach(d => {
+                    d.update(defaultSettings, true, true)
+                 })
+                this.chart.addSeries({
+                    name: 'Best Point',
+                    data: [{
+                        x: dataPoint[this.param_1],
+                        y: dataPoint[this.param_2],
+                        score: score,
+                        ...bestPointSettings,
+                    }],
+                    showInLegend: false
+                });
+
+            } else {
+                this.chart.series[0].addPoint({
+                    x: dataPoint[this.param_1],
+                    y: dataPoint[this.param_2],
+                    color: 'rgba(223, 83, 83,1)',
+                    score: score,
+                    ...defaultSettings
+                });
+            }
+        },
+
+        setParamNames: function (param_1, param_2) {
+            this.chart.xAxis[0].setTitle({text: param_1});
+            this.chart.yAxis[0].setTitle({text: param_2});
+            this.param_1 = param_1;
+            this.param_2 = param_2;
+        },
+
+        clear: function () {
+            this.chart.series[0].setData([]);
+            //delete all series with index bigger than 1
+            while (this.chart.series.length > 1) {
+                this.chart.series[this.chart.series.length - 1].remove(true);
+            }
+            this.chart.xAxis[0].setTitle({text: ""});
+            this.chart.yAxis[0].setTitle({text: ""});
+            this.minScore = 10000000;
+
+        }
+
+    }
+
+
+</script>

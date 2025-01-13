@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+ <div>
+            <form method="post" enctype="multipart/form-data" action="{% url 'upload_files' %}">
+                {% csrf_token %}
+                {{ upload_form }}
+                <button id="upload-button" class="btn btn-primary" type="submit" style="display: block">Upload</button>
+            </form>
+ </div>
+
+
+    <script>
+    const fileInput = document.getElementById('id_file1');
+    const titleInput = document.getElementById('id_title');
+    fileInput.addEventListener('change', (event) => {
+        const selectedFile = event.target.files[0];
+
+        // Set the file name as the value of the title input field
+
+        if(selectedFile.name.split('.').length > 1){
+            titleInput.value =  selectedFile.name.split('.').slice(0, -1).join('.');
+        }else{
+            titleInput.value = selectedFile.name;
+
+        }
+    });
+    </script>
+{% endblock %}
