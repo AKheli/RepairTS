@@ -70,8 +70,8 @@ python3 repair.py -d all -scen all -a all -alg all
 | humidity     | distortion   | a_size        | screen    |
 | elec         | outlier      | a_rate        | imr       |
 | beijingair   | all          | ts_nbr        | screen    |
-| electricity  |              | cts_nbr       | all       |
-| eth_h1       |              | a_factor      |           |
+| electricity  |              | cts_nbr       | scr       |
+| eth_h1       |              | a_factor      | all       |
 | italyair     |              | all           |           |
 | pems         |              |               |           |
 | physionet_2012 |            |               |           |
