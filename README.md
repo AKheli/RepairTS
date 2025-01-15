@@ -24,7 +24,6 @@ sudo apt install python3-pip
 2. create a activate a virtual environment
 
 ```bash
-sudo apt install python3.9-venv
 python3.9 -m venv venv
 source venv/bin/activate
 ```
