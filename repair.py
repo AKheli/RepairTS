@@ -17,7 +17,7 @@ anomaly_choices = list(ic.ANOMALY_TYPES) + ["all"]
 def main(input=None):
     args = init_parser(input=input,
                        estimator_choices=estimator_choices,
-                       scenario_choices=scenario_choices,
+                       # scenario_choices=scenario_choices,
                        anomaly_choices=anomaly_choices)
 
     algorithms = arg_parser.parse_repair_algorithms(args)
