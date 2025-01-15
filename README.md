@@ -52,11 +52,11 @@ ___
 python3 repair.py -d dataset -a anomaly_type -scen scenario_type -alg algorithm
 
 # Examples
-# 1. Single algorithm (cdrep) on a single dataset (bafu5k) with one scenario (ts_nbr) and one anomaly (shift)
-python3 repair.py -d bafu5k -scen ts_nbr -a shift -alg cdrep
+# 1. Single algorithm (screen) on a single dataset (bafu5k) with one scenario (ts_nbr) and one anomaly (shift)
+python3 repair.py -d bafu5k -scen ts_nbr -a shift -alg screen
 
-# 2. Two algorithms (cdrep, rpca) on two datasets (bafu5k, elec) with one scenario (a_rate) and two anomalies (shift, outlier)
-python3 repair.py -d bafu5k,elec -scen a_rate -a shift,outlier -alg cdrep,rpca
+# 2. Two algorithms (screen, rpca) on two datasets (bafu5k, elec) with one scenario (a_rate) and two anomalies (shift, outlier)
+python3 repair.py -d bafu5k,elec -scen a_rate -a shift,outlier -alg screen,rpca
 
 # 3. Run the full benchmark (all algorithms, datasets, scenarios, and anomalies)
 python3 repair.py -d all -scen all -a all -alg all
@@ -66,16 +66,16 @@ python3 repair.py -d all -scen all -a all -alg all
 
 | dataset      | anomaly_type | scenario_type | algorithm | 
 |--------------|--------------|---------------|-----------| 
-| bafu5k       | shift        | ts_len        | rpca      |
+| bafu5k       | shift        | ts_len        | kfilter   |
 | humidity     | distortion   | a_size        | screen    |
 | elec         | outlier      | a_rate        | imr       |
-| beijingair   | all          | ts_nbr        | cdrep     |
-| electricity  |              | cts_nbr       | kfilter   |
-| eth_h1       |              | a_factor      | screen*   |
-| italyair     |              | all           | all       |
+| beijingair   | all          | ts_nbr        | screen    |
+| electricity  |              | cts_nbr       | all       |
+| eth_h1       |              | a_factor      |           |
+| italyair     |              | all           |           |
 | pems         |              |               |           |
-| physionet_2012 |        |               |           |
-| all |        |               |           |
+| physionet_2012 |            |               |           |
+| all          |              |               |           |
 
 ### Data
 
@@ -91,14 +91,14 @@ All results and plots will be saved in the `Results` folder.
 
 ### Examples
 
-1. Run a single algorithm (cdrep) on a single dataset (`bafu5k`) using one scenario (number of time series) and one anomaly (`shift`):
+1. Run a single algorithm (screen) on a single dataset (`bafu5k`) using one scenario (number of time series) and one anomaly (`shift`):
    ```bash
-   python3 repair.py -d bafu5k -scen ts_nbr -a shift -alg cdrep
+   python3 repair.py -d bafu5k -scen ts_nbr -a shift -alg screen
 
-2.	Run two algorithms (cdrep, rpca) on two datasets (bafu5k, msd) using one scenario (a_rate) and two anomalies (shift, outlier):   shift,outlier)
+2.	Run two algorithms (screen, rpca) on two datasets (bafu5k, msd) using one scenario (a_rate) and two anomalies (shift, outlier):   shift,outlier)
 
 ```bash
-python3 repair.py -d bafu5k,msd -scen ts_nbr -a shift,outlier -alg cdrep,rpca
+python3 repair.py -d bafu5k,msd -scen ts_nbr -a shift,outlier -alg screen,rpca
 ```
 
 3.	Run the entire benchmark: all algorithms, all datasets, all scenarios, and all anomalies (approx. 6 hours):
