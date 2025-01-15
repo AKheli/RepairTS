@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # Define the URL and output file
-URL="https://zenodo.org/records/14639318/files/tsrepair_datasets.zip?download=1"
+
+URL="https://zenodo.org/records/14655645/files/tsrepair.zip?download=1"
 OUTPUT_ZIP="tsrepair_datasets.zip"
 BASE_DIR="repair/data"
-OUTPUT_DIR="$BASE_DIR/tsrepair_datasets"
+OUTPUT_DIR="$BASE_DIR/"
 
 # Download the ZIP file
 echo "Downloading the ZIP file from $URL..."
