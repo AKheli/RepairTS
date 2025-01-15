@@ -14,13 +14,14 @@ TSRepair is a comprehensive benchmark for evaluating anomaly repair techniques i
 ## Build Instructions
 
 1. Install Python and pip:
-   ```bash
-   sudo apt install python3.9-dev
-   sudo apt install python3.9-pip
+```bash
+sudo apt install python3.9-dev
+sudo apt install python3.9-pip
+```
 
 
 
-create a activate a virtual environment
+2. create a activate a virtual environment
 
 ```bash
 sudo apt install python3.9-venv
@@ -28,13 +29,13 @@ python3.9 -m venv venv
 source venv/bin/activate
 ```
 
-install the requirements for the Benchmark
+3. install the requirements for the Benchmark
 
 ```bash
 pip3 install -r testing_frame_work/testing_framework_requierements.txt
 ```
 
-install Java for the SCREEN algorithm
+4. install Java for the SCREEN algorithm
 
 ```bash
 sudo apt install openjdk-17-jre
