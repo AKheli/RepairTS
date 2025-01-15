@@ -5,7 +5,7 @@
 URL="https://zenodo.org/records/14655645/files/tsrepair.zip?download=1"
 OUTPUT_ZIP="tsrepair_datasets.zip"
 BASE_DIR="repair/data"
-OUTPUT_DIR="$BASE_DIR/"
+OUTPUT_DIR="$BASE_DIR/test/"
 
 # Download the ZIP file
 echo "Downloading the ZIP file from $URL..."
