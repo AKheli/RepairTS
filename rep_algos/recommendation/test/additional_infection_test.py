@@ -21,7 +21,8 @@ config_search_space = {
 }
 
 
-for dataset in [ "elec" ]: # "bafu5k", , "elec"]:
+#for dataset in [ "elec" ]: # "bafu5k", , "elec"]:
+for dataset in ["bafu5k", "humidity" , "elec", "beijingair", "electricity", "eth_h1", "italyair", "pems", "physionet_2012_all"]:
     for a_type in [POINT_OUTLIER]:
         truth_df = pd.read_csv(f"data/test/{dataset}.csv")
         injected_df, _ = inject_data_df(truth_df, a_type=a_type)

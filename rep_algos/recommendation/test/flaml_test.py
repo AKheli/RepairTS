@@ -87,8 +87,8 @@ def flaml_search(data_set, a_type, factor=2):
     # label    print(f"Best hyperparameters for task {best_task_id}: {best_config}")
     print(f"Output value for task {best_task_id}: {automl.get_best_result()}")
 
-
-for dataset in ["bafu5k", "humidity", "elec"]:
+for dataset in ["bafu5k", "humidity" , "elec", "beijingair", "electricity", "eth_h1", "italyair", "pems", "physionet_2012_all"]:
+    #for dataset in ["bafu5k", "humidity", "elec"]:
     for a_type in [AMPLITUDE_SHIFT, POINT_OUTLIER, DISTORTION]:
         flaml_search(dataset, a_type)
         # truth_df = pd.read_csv(f"data/test/{dataset}.csv")

@@ -38,7 +38,8 @@ def catch_22_features(df):
 
 
 
-datasets =  ["bafu5k", "humidity" , "elec"]
+#datasets =  ["bafu5k", "humidity" , "elec"]
+datasets = ["bafu5k", "humidity" , "elec", "beijingair", "electricity", "eth_h1", "italyair", "pems", "physionet_2012_all"]
 a_types = [AMPLITUDE_SHIFT, POINT_OUTLIER, DISTORTION]
 column = 0
 

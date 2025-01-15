@@ -15,7 +15,9 @@ plt.figure(figsize=(25, 6), dpi=80)
 
 scen_name = "base"
 
-dataset_names = ["bafu5k.csv", "msd1_5.csv", "elec.csv", "humidity.csv"]
+#dataset_names = ["bafu5k.csv", "msd1_5.csv", "elec.csv", "humidity.csv"]
+dataset_names = ["bafu5k.csv", "humidity.csv" , "elec.csv", "beijingair.csv", "electricity.csv", "eth_h1.csv", "italyair.csv", "pems.csv", "physionet_2012_all.csv"]
+
 a_types = ["shift", "outlier", "distortion"]
 
 
