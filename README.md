@@ -64,18 +64,18 @@ python3 repair.py -d dataset -a anomaly_type -scen scenario_type -alg algorithm
 
 ### Arguments
 
-| dataset      | anomaly_type | scenario_type | algorithm | 
-|--------------|--------------|---------------|-----------| 
-| physionet_2012       | shift        | ts_len        | kfilter   |
-| humidity     | distortion   | a_size        | screen    |
-| elec         | outlier      | a_rate        | imr       |
-| beijingair   | all          | ts_nbr        | screen    |
-| electricity  |              | cts_nbr       | scr       |
-| eth_h1       |              | a_factor      | all       |
-| italyair     |              | all           |           |
-| pems         |              |               |           |
-| physionet_2012 |            |               |           |
-| all          |              |               |           |
+| dataset      | anomaly_type | algorithm | 
+|--------------|--------------|-----------| 
+| italyair       | shift        | kfilter   |
+| humidity     | distortion   | screen    |
+| elec         | outlier      | imr       |
+| beijingair   | all          | screen    |
+| electricity  |              | scr       |
+| eth_h1       |              | all       |
+| physionet_2012     |              |           |
+| physionet_2019     |              |           |
+| pems         |              |           |
+| all          |              |           |
 
 
 ### Results
@@ -89,12 +89,11 @@ All results and plots will be saved in the `Results` folder.
 
 
 ```
-# 1. Run a single algorithm (SCR) on a single dataset (physionet19) 
-# with one scenario (a_size) and one type of anomaly (shift and outlier)
+# 1. Run a single algorithm (SCR) on a single dataset (physionet19) and one type of anomaly (shift and outlier)
 python3 repair.py -d physionet19 -scen a_size -a shift,outlier -alg scr
 
 
-# 2. Two algorithms (screen, rpca) on two datasets (physionet_2012, elec) with one scenario (a_rate) and two anomalies (shift, outlier)
+# 2. Two algorithms (screen, rpca) on two datasets (physionet_2012, elec) and two anomalies (shift, outlier)
 python3 repair.py -d physionet12 -scen a_rate -a shift,outlier -alg screen
 
 # 3. Run the full benchmark (all algorithms, datasets, scenarios, and anomalies)
