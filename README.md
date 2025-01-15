@@ -16,7 +16,7 @@ TSRepair is a comprehensive benchmark for evaluating anomaly repair techniques i
 1. Install Python and pip:
 ```bash
 sudo apt install python3.9-dev
-sudo apt install python3.9-pip
+sudo apt install python3-pip
 ```
 
 
