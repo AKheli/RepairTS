@@ -52,7 +52,7 @@ ___
 python3 repair.py -d dataset -a anomaly_type -scen scenario_type -alg algorithm
 ```
 
-# Examples
+### Examples
 
 ```
 # 1. Run a single algorithm (SCR) on a single dataset (physionet19) 
