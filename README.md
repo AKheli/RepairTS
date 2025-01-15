@@ -73,7 +73,8 @@ python3 repair.py -d all -scen all -a all -alg all
 | eth_h1       |              | a_factor      | screen*   |
 | italyair     |              | all           | all       |
 | pems         |              |               |           |
-| physionet_2012_all |        |               |           |
+| physionet_2012 |        |               |           |
+| all |        |               |           |
 
 ### Data
 
