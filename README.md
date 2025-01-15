@@ -59,7 +59,7 @@ python3 repair.py -d dataset -a anomaly_type -scen scenario_type -alg algorithm
 python3 repair.py -d physionet19 -scen a_size -a shift,outlier -alg scr
 
 
-# 2. Two algorithms (screen, rpca) on two datasets (bafu5k, elec) with one scenario (a_rate) and two anomalies (shift, outlier)
+# 2. Two algorithms (screen, rpca) on two datasets (physionet_2012, elec) with one scenario (a_rate) and two anomalies (shift, outlier)
 python3 repair.py -d physionet12 -scen a_rate -a shift,outlier -alg screen
 
 # 3. Run the full benchmark (all algorithms, datasets, scenarios, and anomalies)
@@ -70,7 +70,7 @@ python3 repair.py -d all -scen all -a all -alg all
 
 | dataset      | anomaly_type | scenario_type | algorithm | 
 |--------------|--------------|---------------|-----------| 
-| bafu5k       | shift        | ts_len        | kfilter   |
+| physionet_2012       | shift        | ts_len        | kfilter   |
 | humidity     | distortion   | a_size        | screen    |
 | elec         | outlier      | a_rate        | imr       |
 | beijingair   | all          | ts_nbr        | screen    |
@@ -95,15 +95,15 @@ All results and plots will be saved in the `Results` folder.
 
 ### Examples
 
-1. Run a single algorithm (screen) on a single dataset (`bafu5k`) using one scenario (number of time series) and one anomaly (`shift`):
+1. Run a single algorithm (screen) on a single dataset (`physionet_2012`) using one scenario (number of time series) and one anomaly (`shift`):
 ```bash
-python3 repair.py -d bafu5k -scen ts_nbr -a shift -alg screen
+python3 repair.py -d physionet_2012 -scen ts_nbr -a shift -alg screen
 ```
 
-2.	Run two algorithms (screen, rpca) on two datasets (bafu5k, msd) using one scenario (a_rate) and two anomalies (shift, outlier):   shift,outlier)
+2.	Run two algorithms (screen, rpca) on two datasets (physionet_2012, msd) using one scenario (a_rate) and two anomalies (shift, outlier):   shift,outlier)
 
 ```bash
-python3 repair.py -d bafu5k,msd -scen ts_nbr -a shift,outlier -alg screen,rpca
+python3 repair.py -d physionet_2012,msd -scen ts_nbr -a shift,outlier -alg screen,rpca
 ```
 
 3.	Run the entire benchmark: all algorithms, all datasets, all scenarios, and all anomalies (approx. 6 hours):
