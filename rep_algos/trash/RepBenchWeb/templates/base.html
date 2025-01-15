@@ -1,0 +1,369 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+<head>
+    <title id="title-id"> {{ Title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    {##}
+    {#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+    {#    <link rel="shortcut icon" type="image/x-icon" href="/static/img/global/favicon_vadetis.ico"/>#}
+
+    {% block css %}
+
+        <link href="{% static 'css/lib/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'css/fonts/materialdesignicons/materialdesignicons.min.css' %}" rel="stylesheet"
+              type="text/css"/>
+
+        <link href="{% static 'css/messages.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static  'css/rebBenchWeb.css' %}" rel="stylesheet" type="text/css"/>
+        {% include 'fonts.html' %}
+
+    {% endblock %}
+    {% block head_js %}
+        <meta http-equiv="cache-control" content="max-age=0"/>
+        <meta http-equiv="cache-control" content="no-cache"/>
+        <meta http-equiv="expires" content="0"/>
+        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+        <meta http-equiv="pragma" content="no-cache"/>
+
+        <script src={% static  "js/lib/jquery/jquery.min.js" %} type="text/javascript"></script>
+        <script>
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            const csrftoken = getCookie('csrftoken');
+
+            function confirmDelete(datasetname) {
+                console.log(datasetname)
+                var shouldDelete = confirm("Are you sure you want to delete this item?");
+                var href = "{% url 'delete_dataset' setname='placeholder' %}".replace('placeholder', datasetname)
+                if (shouldDelete) {
+                    // If the user clicks "OK", perform the POST request to delete the item
+                    sendPostRequest(href);
+                    console.log(href)
+                } else {
+                    // If the user clicks "Cancel", do nothing or handle it as you like
+                    console.log("Deletion canceled.");
+                    return false;
+                }
+                return false
+            }
+
+            function sendPostRequest(link) {
+                const formDataCookie = new FormData(document.getElementById('empty-form'));
+                fetch(link, {
+                    method: 'POST',
+                    body: formDataCookie
+                }).then(function (response) {
+                    if (response.status === 200) {
+                        console.log('Item was deleted successfully.');
+                        window.location.reload();
+                    } else {
+                        console.log('Item could not be deleted.');
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        </script>
+        <script src={% static  'js/repBench/helpers.js' %} type="text/javascript"></script>
+
+        {#        {% include "play-buttons-script.html" %}#}
+        {% include "displayDataset/download.html" %}
+    {% endblock %}
+
+</head>
+
+<form id="empty-form" style="display: none">
+    {% csrf_token %}
+</form>
+
+<!-- begin: Body -->
+<body class="kt-page--loading-enabled kt-page--loading kt-page--fixed kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--left kt-aside--fixed kt-page--loading">
+
+<!-- begin: Page -->
+<!-- begin: Mobile Header -->
+{#<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">#}
+{#    <div class="kt-header-mobile__logo">#}
+{#        <a href="{% url 'vadetisweb:index' %}">#}
+{#            <img alt="Logo" src="{% static 'img/global/logo.png' %}" style="max-height: 30px;"/>#}
+{#        </a>#}
+{#    </div>#}
+{#    <div class="kt-header-mobile__toolbar">#}
+{#        <button class="kt-header-mobile__toolbar-topbar-toggler" id="kt_header_mobile_topbar_toggler"><i#}
+{#                class="mdi mdi-dots-vertical mdi-24px"></i></button>#}
+{#        <button class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler"><span></span></button>#}
+{#    </div>#}
+{#</div>#}
+<!-- end: Mobile Header -->
+
+<div class="kt-grid kt-grid--hor kt-grid--root">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+
+            <!-- begin: Header -->
+            <div id="kt_header" class="kt-header  kt-header--fixed " data-ktheader-minimize="on">
+                <div class="kt-container kt-container--fluid">
+
+                    <!-- begin: Menu -->
+                    <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i
+                            class="mdi mdi-close mdi-18px"></i></button>
+                    <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_header_menu_wrapper">
+                        <button style="display: none;" class="kt-aside-toggler kt-aside-toggler--left"
+                                id="kt_aside_toggler"><span></span></button>
+                        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
+                            <ul class="kt-menu__nav ">
+                                {#                                <li class="kt-menu__item kt-menu__item--rel"><a href="{% url 'index' %}"#}
+                                {#                                                                                class="kt-menu__link"><span#}
+                                {#                                        class="kt-menu__link-text">{{ Title }}</span></a></li>#}
+
+                                <li class="kt-menu__item kt-menu__item--rel"><a href="{% url 'index' %}"
+                                                                                class="kt-menu__link"><span
+                                        class="kt-menu__link-text">{{ Title }}</span></a></li>
+                                <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel"
+                                    data-ktmenu-submenu-toggle="hover" aria-haspopup="true"><a href="javascript:;"
+                                                                                               class="kt-menu__link kt-menu__toggle"><span
+                                        class="kt-menu__link-text">Datasets</span></a>
+                                    <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item " aria-haspopup="true"><a
+                                                    href="{% url 'display_datasets' option="Display" %}"
+                                                    class="kt-menu__link "><i
+                                                    class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                                    class="kt-menu__link-text">Real-World Datasets</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a
+                                                    href="{% url 'display_datasets' option="Display" synthetic="True" %}"
+                                                    class="kt-menu__link "><i
+                                                    class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                                    class="kt-menu__link-text">Synthetic Datasets</span></a></li>
+
+                                            <li class="kt-menu__item " aria-haspopup="true"><a
+                                                    href="{% url 'upload' %}"
+                                                    class="kt-menu__link"><i
+                                                    class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                                    class="kt-menu__link-text">Upload</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel"
+                                    data-ktmenu-submenu-toggle="hover" aria-haspopup="true"><a href="javascript:;"
+                                                                                               class="kt-menu__link kt-menu__toggle"><span
+                                        class="kt-menu__link-text">Repair</span></a>
+                                    <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item " aria-haspopup="true"><a
+                                                    href="{% url 'display_datasets' option="Repair" %}"
+                                                    class="kt-menu__link "><i
+                                                    class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                                    class="kt-menu__link-text">Inject & Repair</span></a>
+                                            </li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a
+                                                    href="{% url 'inject_and_compare' %}"
+                                                    class="kt-menu__link "><i
+                                                    class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                                    class="kt-menu__link-text">Repair Comparison</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel"
+                                    data-ktmenu-submenu-toggle="hover" aria-haspopup="true"><a href="javascript:;"
+                                                                                               class="kt-menu__link kt-menu__toggle"><span
+                                        class="kt-menu__link-text">Recommendation</span></a>
+                                    <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item " aria-haspopup="true"><a
+                                                    href="{% url 'recommendation' type="FLAML" %}"
+                                                    class="kt-menu__link "><i
+                                                    class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                                    class="kt-menu__link-text">FLAML</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a
+                                                    href="{% url 'recommendation' type="RayTune" %}"
+                                                    class="kt-menu__link "><i
+                                                    class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                                    class="kt-menu__link-text">Ray Tune</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel"
+                                    data-ktmenu-submenu-toggle="hover" aria-haspopup="true"><a href="javascript:;"
+                                                                                               class="kt-menu__link kt-menu__toggle"><span
+                                        class="kt-menu__link-text">Hyperparameters</span></a>
+                                    <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item " aria-haspopup="true"><a
+                                                    href="{% url 'optimization_datasets' %}"
+                                                    class="kt-menu__link "><i
+                                                    class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                                    class="kt-menu__link-text">Parameter Calibration</span></a></li>
+                                            <li class="kt-menu__item " aria-haspopup="true"><a
+                                                    href="{% url 'dim_reduction_datasets' %}"
+                                                    class="kt-menu__link "><i
+                                                    class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+                                                    class="kt-menu__link-text">Parameter Impact</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="kt-menu__item kt-menu__item--rel"><a href="{% url 'about' %}"
+                                                                                class="kt-menu__link"><span
+                                        class="kt-menu__link-text">About</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end: Menu -->
+
+                    {#                    <!-- begin: Logo -->#}
+                    {#                    <div class="kt-header__brand  kt-grid__item" id="kt_header_brand">#}
+                    {#                        <a class="kt-header__brand-logo" href="{% url 'vadetisweb:index' %}">#}
+                    {#                            <img alt="Logo" src="{% static 'img/global/logo.png' %}"/>#}
+                    {#                        </a>#}
+                    {#                    </div>#}
+                    {#                    <!-- end: Logo -->#}
+                    {##}
+                    {#                    <!-- begin: Topbar -->#}
+                    {#                    <div class="kt-header__topbar kt-grid__item">#}
+                    {##}
+                    {#                        <!--begin: Search -->#}
+                    {#                        {% block search %}#}
+                    {#                            {% include 'vadetisweb/parts/header/search.html' %}#}
+                    {#                        {% endblock %}#}
+                    {#                        <!--end: Search -->#}
+                    {##}
+                    {#                        <!--begin: Actions -->#}
+                    {#                        {% block actions %}#}
+                    {#                            {% include 'vadetisweb/parts/header/actions.html' %}#}
+                    {#                        {% endblock %}#}
+                    {#                        <!--end: Actions -->#}
+                    {##}
+                    {#                        <!--begin: User -->#}
+                    {#                        {% block user %}#}
+                    {#                            {% include 'vadetisweb/parts/header/user_navigation.html' %}#}
+                    {#                        {% endblock %}#}
+                    {#                        <!--end: User -->#}
+                    {##}
+                    {#                        <!--begin: Login -->#}
+                    {#                        {% block login_block %}#}
+                    {#                            {% include 'vadetisweb/parts/header/login_block.html' %}#}
+                    {#                        {% endblock %}#}
+                    {#                        <!--end: Login -->#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <!-- end: Topbar -->#}
+                </div>
+            </div>
+            <!-- end: Header -->
+
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-grid--stretch">
+                <div class="kt-container kt-body  kt-grid kt-grid--ver" id="kt_body">
+                    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+                        {#                        <!-- begin: SubHeader -->#}
+                        <div class="kt-subheader kt-grid__item" id="kt_subheader">
+                            <div class="kt-subheader__main">
+                                {% block page_title %}{% endblock %}
+                                <span class="kt-subheader__separator kt-hidden"></span>
+                            </div>
+                        </div>
+                        <!-- end: SubHeader -->
+
+                        <!-- begin: Content -->
+                        <div class="kt-content kt-grid__item kt-grid__item--fluid" id="kt_content">
+                            {#                                                    <div id="message-container">#}
+                            {#                                                        {% include 'vadetisweb/parts/messages.html' %}#}
+                            {#                                                    </div>#}
+                            <!-- begin: Main Content -->
+                            {% block  contnet_header %}{% endblock %}
+                            {% block content %}{% endblock %}
+                            <!-- end: Main Content -->
+                        </div>
+                        <!-- end: Content -->
+                    </div>
+                </div>
+            </div>
+            <!-- begin: Footer -->
+            {% block footer %}
+                <div class="kt-footer kt-grid__item" id="kt_footer">
+                    <div class="kt-container">
+                        <div class="kt-footer__bottom">
+                            <div class="kt-footer__copyright">
+                                RepBench - Time Series Anomaly Repair Benchmark
+                            </div>
+                            <div class="kt-footer__menu">
+                                {#                                <a href="{% url 'vadetisweb:about' %}" class="kt-link">About</a>#}
+                                <a href="https://exascale.info/" target="_blank" class="kt-link">eXascale Infolab</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>                        {% endblock %}
+            <!-- end: Footer -->
+        </div>
+    </div>
+</div>
+<!-- end: Page -->
+
+<!-- begin: Scrolltop -->
+<div id="kt_scrolltop" class="kt-scrolltop">
+    <i class="mdi mdi-arrow-up-bold mdi-24px"></i>
+</div>
+<!-- end: Scrolltop -->
+{% block bottom_js %}
+    <script src="{% static 'js/lib/popper-js/popper.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/lib/bootstrap/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/lib/perfect-scrollbar/perfect-scrollbar.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/lib/js-cookie/js-cookie.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/lib/tooltip-js/tooltip.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/lib/sticky/sticky.min.js' %}" type="text/javascript"></script>
+    <!-- end: Global Plugins Scripts -->
+    <!-- begin:Global Scripts -->
+    <script src="{% static 'js/custom/utils.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/global/scripts.js' %}" type="text/javascript"></script>
+    <!-- end:Global Script -->
+    <script type="text/javascript">
+        {#var KTQuickSearchMobile = KTQuickSearch;#}
+        {#jQuery(document).ready(function () {#}
+        {#    if (KTUtil.get('kt_quick_search_default')) {#}
+        {#        KTQuickSearch().init(KTUtil.get('kt_quick_search_default'), "{% url 'vadetisweb:dataset_search' %}");#}
+        {#    }#}
+        {#    if (KTUtil.get('kt_quick_search_inline')) {#}
+        {#        KTQuickSearchMobile().init(KTUtil.get('kt_quick_search_inline'), "{% url 'vadetisweb:dataset_search' %}");#}
+        {#    }#}
+        {# });#}
+
+        const toggleButtons = document.querySelectorAll('.btn-icon-md');
+
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                toggleButtons.forEach(btn => {
+                    const icon = btn.querySelector('i');
+                    if (icon.classList.contains('mdi-chevron-up') && button !== btn) {
+                        btn.click();
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
+{% block additional_bottom_js %}
+{% endblock %}
+{% block form_media_js %}
+    {% if form %}
+        <!-- begin: Form Media Scripts -->
+        {{ form.media.js }}
+        <!-- end: Form Media Scripts -->
+    {% endif %}
+{% endblock %}
+</body>
+</html>

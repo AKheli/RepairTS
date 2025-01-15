@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{#{% load django_bootstrap_breadcrumbs %}#}
+
+
+{##}
+{#{% block page_title %}#}
+{#<h3 class="kt-subheader__title">{{ Title }}</h3>#}
+{#{% endblock %}#}
+
+{% block content %}
+    {{ block.super }}
+    <div class="kt-portlet">
+        <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+                <b><h3 class="kt-badge--bold"> Online Tool for Anomaly Repair in Time Series </h3> </b>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <p>
+                {#            Vadetis is web application to perform, compare and validate various anomaly detection algorithms using different configurations. It allows users to upload their own datasets#}
+                {#            as well as training data in order to perform outlier detection. The datasets can either be shared with other users or only be used by yourself.#}
+                {#            The datasets can be altered by injecting additional outliers.#}
+                {#            Look into the FAQ page for more information about the usage of this application.#}
+                {{ Title }} is an online tool to compare various anomaly repair techniques.
+            </p>
+
+            {#            <h5>Features</h5>#}
+            <div class="row">
+                <div class="col-md-5">
+                    <p><b>Main Parts:</b></p>
+                    <ul>
+                        <li>Display
+                            <ul>
+                                <li><a href="{% url 'display_datasets' option="Display" %}">
+                                    Real-World Datasets</a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="{% url 'display_datasets' option="Display" synthetic="True" %}">
+                                    Synthetic Datasets</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Anomaly Repair
+                            <ul>
+                                <li><a href="{% url 'display_datasets' option="Repair" %}">Inject and Repair
+                                    Datasets</a>
+                                </li>
+                                <li><a href="{% url 'inject_and_compare' %}">Compare Repair Techniques</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Recommendation
+                            <ul>
+                                <li><a href="{% url 'recommendation' type="FLAML" %}">Model Selection using Flaml</a>
+                                </li>
+                                <li><a href="{% url 'recommendation' type="RayTune" %}">Model Selection using
+                                    RayTune</a></li>
+                            </ul>
+                        </li>
+                        <li>Algorithm Tuning
+                            <ul>
+                                <li><a href="{% url 'repair_datasets' type='dimensionality_reduction' %}">
+{#                                    Detailed Repair of Matrix#}
+                                   Matrix decomposition
+{#                                    Techniques#}
+                                </a></li>
+                                <li><a href=" {% url 'optimization_datasets' %}">Parameter Search
+{#                                    using Bayesian Optimization or Successive Halving Search#}
+                                    </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-5">
+                    <p><b>Supported algorithms:</b></p>
+                    <ul>
+                        <li>Iterative Minimum Repairing (IMR) <a href="https://www.vldb.org/pvldb/vol10/p1046-song.pdf"
+                                                                 target="_"> [VLDB 2017] </a></li>
+                        <li>Stream Data Cleaning under Speed Constraints (SCREEN) <a
+                                href="https://sxsong.github.io/doc/15sigmod-screen.pdf" target="_"> [SIGMOD 2015] </a>
+                        </li>
+                        <li>CDrep (Repair based on the Centroid Decomposition)
+                            <a href="https://link.springer.com/epdf/10.1007/s10115-019-01421-7?sharing_token=ArbT02FoYBvvgtLRFAD7WPe4RwlQNchNByi7wbcMAY68PG4PyZ1qFeajhCtjowDpPRkXLjAKmZcG0dA9vjhyjkIqCQMfdzMyXZT2QMdmzvex9vXSyXvOAKeZ1X0HOSyJfEYW5o-B83UrvUz4FIBQqHZuw_r7BgeQ4HMvBzQnU10="
+                               target="_"> [KAIS 2020] </a>
+                        </li>
+                        <li>RPCA (Robust PCA using Huber Loss Function)
+                            <a href="https://link.springer.com/article/10.1134/S0005117917030092"
+                               target="_"> [ARC 17] </a>
+                        </li>
+                        {#  Journal “Avtomatika i Telemekhanika” is published in Russian and translated in ... Abbreviation: АиТ (in Russian), AiT (transliterated), ARC (English title)#}
+                    </ul>
+
+                    <p><b>Algorithm Selection </b></p>
+                    <ul>
+                        <li> A Fast Library for Automated Machine Learning & Tuning<a href="https://microsoft.github.io/FLAML/"
+                                                                 target="_"> (FLAML) </a></li>
+                        <li>Ray Tune: Hyperparameter Tuning (<a
+                                href="https://arxiv.org/abs/1807.05118" target="_">Paper </a>
+                            |<a
+                                href="https://docs.ray.io/en/latest/tune/index.html" target="_"> Documentation</a>)
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <p>This application was implemented at the at the <a href="http://exascale.info/" target="_blank">eXascale
+                Infolab</a>, a research group at the <a href="http://www.unifr.ch/" target="_blank">University of
+                Fribourg</a>, Switzerland.</p>
+
+            {#            <div id="Publications">#}
+            {#                <p>#}
+            {#                <h3>#}
+            {#                    <b>Publications:</b>#}
+            {#                </h3>#}
+            {#                <ol>#}
+            {#                    <li>Zhang, Aoqian, et al. <b>"Time series data cleaning: From anomaly detection to anomaly#}
+            {#                        repairing."</b> Proceedings of the VLDB Endowment 10.10 (2017): 1046-1057.#}
+            {#                    </li>#}
+            {#                    <li>Song, Shaoxu, et al. <b>"SCREEN: stream data cleaning under speed constraints."</b> Proceedings#}
+            {#                        of#}
+            {#                        the 2015 ACM SIGMOD International Conference on Management of Data. 2015.#}
+            {#                    </li>#}
+            {#                </ol>#}
+            {#            </div>#}
+            {#                        </p>#}
+        </div>
+    </div>
+{% endblock %}

@@ -1,1 +1,0 @@
-from testing_frame_work.data_methods.data_class import normalize_together

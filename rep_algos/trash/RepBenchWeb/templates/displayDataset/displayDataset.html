@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block css %}
+    {{ block.super }}
+    <link href="{% static 'css/lib/highcharts/highcharts.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/custom/highcharts.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/lib/nouislider/nouislider.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/lib/roundslider/roundslider.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/lib/ion-rangeslider/ion.rangeSlider.min.css' %}" rel="stylesheet" type="text/css"/>
+
+{#    <style>#}
+{#        .highcharts-legend-item-hidden text {#}
+{#            text-decoration: none !important;#}
+{#        }#}
+{#    </style>#}
+{% endblock %}
+
+{% block head_js %}
+{{ block.super }}
+<script src="{% static 'js/lib/binarytransport/jquery.binarytransport.js' %}" type="text/javascript"></script>
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script src="http://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+{% endblock %}
+
+
+{% block content %}
+    {% block aboveChartContent %}
+    {% endblock %}
+
+    {% block chartContent %}
+        <script>
+            // Javascript needed for all graph pages
+            const dataTitle = '{{ data_info.title }}'
+        </script>
+        <div>
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    {% block head %}
+
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title"> {{ setname }} </h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div id="highcharts_head_actions" class="kt-portlet__head-actions">
+                                {% include "displayDataset/chartButton.html" %}
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+
+                <div class="kt-portlet__body kt-portlet__body--fit">
+                </div>
+                <!--begin: Highcharts -->
+                {% include 'displayDataset/MainChart.html' %}
+                <!--end: Highcharts -->
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block belowChartContent %}
+        <div class="row" style="padding-top: 30px">
+            <div class="col-md-6">
+                {% include "displayDataset/data_info_portlet.html" %}
+            </div>
+
+            <div id="correlation" class="col-md-6">
+                <div id="corr_container" style="max-height: 700px;"></div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+    {% block js %}
+        <script src='{% static "js/repBench/display/corr-table.js" %}'></script>
+        <script>
+            const categories = {{ data_info.columns | safe }};
+            const corr_data = {{ data_info.corr_data | safe }};
+            initCorrTable(categories, corr_data, 'corr_container')
+        </script>
+    {% endblock %}
+{% endblock %}
+
