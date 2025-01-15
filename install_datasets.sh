@@ -3,7 +3,8 @@
 # Define the URL and output file
 URL="https://zenodo.org/records/14639318/files/tsrepair_datasets.zip?download=1"
 OUTPUT_ZIP="tsrepair_datasets.zip"
-OUTPUT_DIR="tsrepair_datasets"
+BASE_DIR="repair/data"
+OUTPUT_DIR="$BASE_DIR/tsrepair_datasets"
 
 # Download the ZIP file
 echo "Downloading the ZIP file from $URL..."
@@ -17,9 +18,14 @@ else
     exit 1
 fi
 
-# Create output directory if it doesn't exist
+# Create output directories if they don't exist
+if [ ! -d "$BASE_DIR" ]; then
+    mkdir -p "$BASE_DIR"
+    echo "Created base directory: $BASE_DIR"
+fi
+
 if [ ! -d "$OUTPUT_DIR" ]; then
-    mkdir "$OUTPUT_DIR"
+    mkdir -p "$OUTPUT_DIR"
     echo "Created directory: $OUTPUT_DIR"
 fi
 
