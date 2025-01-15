@@ -45,15 +45,16 @@ sudo apt install openjdk-17-jre
 ___
 
 
-## Execution
+## Upstream Evaluation
 
 ```bash
 # General Execution Command
 python3 repair.py -d dataset -a anomaly_type -scen scenario_type -alg algorithm
+```
 
 # Examples
 
-
+```
 # 1. Run a single algorithm (SCR) on a single dataset (physionet19) 
 # with one scenario (a_size) and one type of anomaly (shift and outlier)
 python3 repair.py -d physionet19 -scen a_size -a shift,outlier -alg scr
@@ -106,9 +107,10 @@ python3 repair.py -d physionet_2012 -scen ts_nbr -a shift -alg screen
 python3 repair.py -d physionet_2012,msd -scen ts_nbr -a shift,outlier -alg screen,rpca
 ```
 
-3.	Run the entire benchmark: all algorithms, all datasets, all scenarios, and all anomalies (approx. 6 hours):
 
-```bash
-python3 repair.py -d all -scen all -a all -alg all
-```
+___
+
+
+## Downstream Evaluation
+
 
