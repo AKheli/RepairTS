@@ -31,6 +31,7 @@ source venv/bin/activate
 ```bash
 pip3 install --upgrade pip
 pip3 install -r install_dependencies.txt
+pip3 install -r requirements.txt
 ```
 
 4. install Java for the SCREEN algorithm
