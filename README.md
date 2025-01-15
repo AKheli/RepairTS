@@ -92,8 +92,9 @@ All results and plots will be saved in the `Results` folder.
 ### Examples
 
 1. Run a single algorithm (screen) on a single dataset (`bafu5k`) using one scenario (number of time series) and one anomaly (`shift`):
-   ```bash
-   python3 repair.py -d bafu5k -scen ts_nbr -a shift -alg screen
+```bash
+python3 repair.py -d bafu5k -scen ts_nbr -a shift -alg screen
+```
 
 2.	Run two algorithms (screen, rpca) on two datasets (bafu5k, msd) using one scenario (a_rate) and two anomalies (shift, outlier):   shift,outlier)
 
