@@ -19,8 +19,6 @@ sudo apt install python3.9-dev
 sudo apt install python3-pip
 ```
 
-
-
 2. create a activate a virtual environment
 
 ```bash
@@ -40,6 +38,18 @@ pip3 install -r install_dependencies.txt
 ```bash
 sudo apt install openjdk-17-jre
 ```
+
+___
+
+## Dataset 
+
+- Download and Decompress Datasets: 
+  ```bash
+  sudo sh install_datasets.sh
+  ```
+
+- The data must be in CSV format.
+- The `-d` argument expects the dataset to be located in the `data/test/` folder.
 
 ___
 
@@ -67,10 +77,6 @@ python3 repair.py -d dataset -a anomaly_type -scen scenario_type -alg algorithm
 | physionet_2012 |            |               |           |
 | all          |              |               |           |
 
-### Data
-
-- The data must be in CSV format.
-- The `-d` argument expects the dataset to be located in the `data` folder.
 
 ### Results
 
