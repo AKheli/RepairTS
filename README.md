@@ -52,11 +52,15 @@ ___
 python3 repair.py -d dataset -a anomaly_type -scen scenario_type -alg algorithm
 
 # Examples
-# 1. Single algorithm (screen) on a single dataset (bafu5k) with one scenario (ts_nbr) and one anomaly (shift)
-python3 repair.py -d bafu5k -scen ts_nbr -a shift -alg screen
+
+
+# 1. Run a single algorithm (SCR) on a single dataset (physionet19) 
+# with one scenario (a_size) and one type of anomaly (shift and outlier)
+python3 repair.py -d physionet19 -scen a_size -a shift,outlier -alg scr
+
 
 # 2. Two algorithms (screen, rpca) on two datasets (bafu5k, elec) with one scenario (a_rate) and two anomalies (shift, outlier)
-python3 repair.py -d bafu5k,elec -scen a_rate -a shift,outlier -alg screen,rpca
+python3 repair.py -d physionet12 -scen a_rate -a shift,outlier -alg screen
 
 # 3. Run the full benchmark (all algorithms, datasets, scenarios, and anomalies)
 python3 repair.py -d all -scen all -a all -alg all

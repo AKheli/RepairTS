@@ -38,6 +38,7 @@ def normalize_together(X, Y):
 
 
 def infer_data_file(file_name, folder):
+    print(file_name, folder)
     files_in_folder = [f for f in os.listdir(folder) if os.path.isfile(f"{folder}/{f}")]
     assert len(files_in_folder) > 0, os.listdir(folder)
     possible_files = [f for f in files_in_folder if f.startswith(file_name)]
