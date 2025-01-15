@@ -1,6 +1,6 @@
-# TSRepair
+# RepairTS
 
-TSRepair is a comprehensive benchmark for evaluating anomaly repair techniques in time series datasets. It supports both upstream and downstream evaluation, enabling users to measure and compare the performance of various algorithms under different contamination scenarios. With TSRepair, users can inject anomalies, repair data, and analyze results using a diverse set of datasets, repair techniques, and metrics.
+RepairTS is a comprehensive benchmark for evaluating anomaly repair techniques in time series datasets. It supports both upstream and downstream evaluation, enabling users to measure and compare the performance of various algorithms under different contamination scenarios. With RepairTS, users can inject anomalies, repair data, and analyze results using a diverse set of datasets, repair techniques, and metrics.
 
 ---
 
