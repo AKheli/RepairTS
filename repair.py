@@ -23,6 +23,10 @@ def main(input=None):
     algorithms = arg_parser.parse_repair_algorithms(args)
 
     scen_names = arg_parser.parse_scen_names(args)
+    
+    # scen_names = arg_parser.parse_scen_names(args)
+    scen_names = ["a_rate"]
+
 
     ### read data file_paths
     data_files = args.data
