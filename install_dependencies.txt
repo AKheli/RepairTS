@@ -23,3 +23,8 @@ toml==0.10.2
 tzdata==2023.3
 pykalman==0.9.5
 JPype1==1.4.1
+tensorflow==2.12.0
+torch==2.0.1
+torchvision==0.15.2
+torchaudio==2.0.2
+xgboost==1.7.6
