@@ -11,7 +11,7 @@ import testing_frame_work.scenarios.scenario_config as sc
 from repair import algo_mapper
 
 estimator_choices = list(algo_mapper.keys()) + ["all"]
-scenario_choices = list(sc.SCENARIO_TYPES) + ["all"]
+# scenario_choices = list(sc.SCENARIO_TYPES) + ["all"]
 anomaly_choices = list(ic.ANOMALY_TYPES) + ["all"]
 
 def main(input=None):
@@ -22,7 +22,7 @@ def main(input=None):
 
     algorithms = arg_parser.parse_repair_algorithms(args)
 
-    scen_names = arg_parser.parse_scen_names(args)
+    #scen_names = arg_parser.parse_scen_names(args)
     
     # scen_names = arg_parser.parse_scen_names(args)
     scen_names = ["a_rate"]

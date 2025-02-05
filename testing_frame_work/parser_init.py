@@ -40,7 +40,7 @@ def add_data_arguments_to_parser(parser, data_choices):
 
 def add_injection_arguments_to_parser(parser ,scenario_choices ,anomaly_choices):
     parser.add_argument('-a','-a_type', type=name_check(choices=anomaly_choices, para_name="a_type") , required=True)
-    parser.add_argument("-scen", "-scennario", type=name_check(choices=scenario_choices, para_name="scen")  , required=True)
+    # parser.add_argument("-scen", "-scennario", type=name_check(choices=scenario_choices, para_name="scen")  , required=True)
     parser.add_argument("-saveinjected",  action='store_true')
 
 
