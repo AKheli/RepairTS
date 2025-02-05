@@ -8,7 +8,7 @@ import torch
 from torch import nn, optim
 import numpy as np
 
-# Define hyperparameters for grid search
+# hyperparameters for grid search
 xgboost_hyperparameters = {
     'n_estimators': [50, 100, 200],
     'learning_rate': [0.01, 0.1, 0.2],
@@ -28,7 +28,7 @@ transformer_hyperparameters = {
     'epochs': [10, 20]
 }
 
-# Define transformer model
+# transformer model
 class TransformerModel(nn.Module):
     def __init__(self, input_size, num_classes):
         super(TransformerModel, self).__init__()
@@ -64,10 +64,10 @@ def train_rnn(X_train, y_train, X_test, y_test):
 def train_transformer(X_train, y_train, X_test, y_test, input_size):
     model = TransformerModel(input_size=input_size, num_classes=1)
     criterion = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.01)  # Placeholder; tuned below
+    optimizer = optim.Adam(model.parameters(), lr=0.01)  # placeholder; tuned below
 
     # Training loop
-    for epoch in range(20):  # Placeholder; tuned below
+    for epoch in range(20):  # placeholder; tuned below
         model.train()
         inputs = torch.tensor(X_train, dtype=torch.float32)
         targets = torch.tensor(y_train, dtype=torch.float32).unsqueeze(1)
