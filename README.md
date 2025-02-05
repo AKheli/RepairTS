@@ -124,10 +124,6 @@ The downstream evaluation script trains a model on original, contaminated, and r
 **Command:**
 ```bash
 cd downstream/
-```
-
-**Command:**
-```bash
 python3 downstream_evaluation.py --dataset dataset_name --task task_name --repaired_path path_to_repaired_data
 ```
 
