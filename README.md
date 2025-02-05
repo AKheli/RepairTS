@@ -58,7 +58,7 @@ ___
 ## Upstream Evaluation
 
 ```bash
-python3 repair.py -d dataset -a anomaly_type -scen scenario_type -alg algorithm
+python3 repair.py -d dataset -a anomaly_type -alg algorithm
 ```
 
 
@@ -90,14 +90,14 @@ All results and plots will be saved in the `Results` folder.
 
 ```
 # 1. Run a single algorithm (SCR) on a single dataset (physionet19) and one type of anomaly (shift and outlier)
-python3 repair.py -d physionet19 -scen a_size -a shift,outlier -alg scr
+python3 repair.py -d physionet19  -a shift,outlier -alg scr
 
 
 # 2. Two algorithms (screen, rpca) on two datasets (physionet_2012, elec) and two anomalies (shift, outlier)
-python3 repair.py -d physionet12 -scen a_rate -a shift,outlier -alg screen
+python3 repair.py -d physionet12 -a shift,outlier -alg screen
 
-# 3. Run the full benchmark (all algorithms, datasets, scenarios, and anomalies)
-python3 repair.py -d all -scen a_rate -a all -alg all
+# 3. Run the full benchmark (all algorithms, datasets, and anomalies)
+python3 repair.py -d all -a all -alg all
 ```
 
 ___
