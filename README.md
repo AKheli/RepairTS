@@ -50,7 +50,7 @@ ___
   ```
 
 - The data must be in CSV format.
-- The `-d` argument expects the dataset to be located in the `data/test/` folder.
+- The data will be located in the `data/test/` folder.
 
 ___
 
