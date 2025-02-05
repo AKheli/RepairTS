@@ -1,23 +1,19 @@
 import os
-from models.classification import run_classification
-from models.regression import run_regression
-from models.forecasting import run_forecasting
-
-DATA_PATH = "./datasets"
-
-def main():
-    run_classification(
-        original_data=os.path.join(DATA_PATH, "original/classification.csv"),
-        repaired_data=os.path.join(DATA_PATH, "repaired/classification.csv"),
-    )
-    run_regression(
-        original_data=os.path.join(DATA_PATH, "original/regression.csv"),
-        repaired_data=os.path.join(DATA_PATH, "repaired/regression.csv"),
-    )
-    run_forecasting(
-        original_data=os.path.join(DATA_PATH, "original/forecasting.csv"),
-        repaired_data=os.path.join(DATA_PATH, "repaired/forecasting.csv"),
-    )
+from data_loader import load_data
+from models.classification_xgboost import run_xgboost_classification
+from models.regression_rnn import run_rnn_regression
+from models.forecasting_transformer import run_transformer_forecasting
 
 if __name__ == "__main__":
-    main()
+    # Load original, contaminated, and repaired datasets
+    original_data, contaminated_data, repaired_data = load_data()
+
+    # Run downstream evaluations
+    print("Running XGBoost Classification...")
+    run_xgboost_classification(original_data, contaminated_data, repaired_data)
+
+    print("Running RNN Regression...")
+    run_rnn_regression(original_data, contaminated_data, repaired_data)
+
+    print("Running Transformer Forecasting...")
+    run_transformer_forecasting(original_data, contaminated_data, repaired_data)
