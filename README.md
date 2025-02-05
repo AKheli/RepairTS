@@ -97,7 +97,7 @@ python3 repair.py -d physionet19 -scen a_size -a shift,outlier -alg scr
 python3 repair.py -d physionet12 -scen a_rate -a shift,outlier -alg screen
 
 # 3. Run the full benchmark (all algorithms, datasets, scenarios, and anomalies)
-python3 repair.py -d all -scen all -a all -alg all
+python3 repair.py -d all -scen a_rate -a all -alg all
 ```
 
 ___
