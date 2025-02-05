@@ -105,7 +105,7 @@ ___
 
 ## Downstream Evaluation
 
-The downstream evaluation assesses the effectiveness of repaired time series data on practical tasks, including classification, regression, and forecasting. This evaluation ensures that repairs not only restore data integrity but also improve the performance of real-world applications. The implementation is available under the `downstream/` folder, containing code for loading datasets, training models, and reporting task-specific metrics.
+The downstream evaluation assesses the effectiveness of repaired time series data on practical tasks, including classification, regression, and forecasting. This evaluation ensures that repairs not only restore data quality but also improve the performance of real-world applications. The implementation is available under the `downstream/` folder, containing code for loading datasets, training models, and reporting task-specific metrics.
 
 ---
 
@@ -119,7 +119,12 @@ The downstream evaluation assesses the effectiveness of repaired time series dat
 
 ### Running the Downstream Pipeline
 
-The downstream evaluation script trains a model on original, contaminated, and repaired datasets, and compares performance using key metrics.
+The downstream evaluation script trains a model on original, contaminated, and repaired datasets, and compares performance.
+
+**Command:**
+```bash
+cd downstream/
+```
 
 **Command:**
 ```bash
