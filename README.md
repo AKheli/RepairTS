@@ -58,7 +58,6 @@ ___
 ## Upstream Evaluation
 
 ```bash
-# General Execution Command
 python3 repair.py -d dataset -a anomaly_type -scen scenario_type -alg algorithm
 ```
 
