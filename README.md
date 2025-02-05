@@ -111,9 +111,9 @@ The downstream evaluation assesses the effectiveness of repaired time series dat
 
 ### Tasks and Models
 
-- **Classification**: Uses the XGBoost classifier, suitable for structured data and robust to noisy features.
-- **Regression**: Utilizes GRU-based Recurrent Neural Networks (RNNs) to capture sequential dependencies in time series.
-- **Forecasting**: Employs Transformer-based models for multi-step predictions by leveraging long-range dependencies.
+- **Classification**: Implements the XGBoost classifier
+- **Regression**: Implements GRU-based Recurrent Neural Networks (RNNs) 
+- **Forecasting**: Implements a Transformer-based model
 
 ---
 
@@ -159,7 +159,7 @@ python3 downstream_evaluation.py --dataset eth_h1 --task forecasting --repaired_
 ### Model-Specific Details and Hyperparameter Tuning
 
 1. **XGBoost for Classification**
-   - **Model Description**: XGBoost is a gradient-boosting algorithm known for its efficiency in handling noisy and structured data. It builds an ensemble of decision trees iteratively.
+   - **Model Description**: XGBoost is a gradient-boosting algorithm that builds an ensemble of decision trees iteratively.
    - **Metrics**: F1-score is used to evaluate the model’s classification performance.
    - **Tuned Hyperparameters**:
      - `max_depth`: Controls the maximum depth of the trees.
@@ -169,24 +169,24 @@ python3 downstream_evaluation.py --dataset eth_h1 --task forecasting --repaired_
    - **Optimization Method**: Grid search is used to select the best hyperparameters by maximizing the F1-score.
 
 2. **GRU-based RNN for Regression**
-   - **Model Description**: GRU-based RNNs are well-suited for capturing sequential patterns and dependencies in time series data while avoiding vanishing gradient issues.
+   - **Model Description**: GRU-based RNNs that capture sequential patterns while avoiding vanishing gradient issues.
    - **Metrics**: Root Mean Squared Error (RMSE) is used to measure prediction accuracy.
    - **Tuned Hyperparameters**:
      - `hidden_units`: Number of GRU units in each layer.
      - `dropout_rate`: Dropout rate to prevent overfitting.
      - `batch_size`: Number of samples per training batch.
      - `learning_rate`: Learning rate for the optimizer.
-   - **Optimization Method**: Hyperparameters are tuned using grid search with validation sets to minimize RMSE.
+   - **Optimization Method**: Grid search is used to select the best hyperparameters by minimizing the RMSE.
 
 3. **Transformer for Forecasting**
-   - **Model Description**: Transformers leverage self-attention mechanisms to model both local and global dependencies, making them suitable for long-range predictions in time series.
+   - **Model Description**: Transformers use self-attention mechanisms to model both local and global dependencies.
    - **Metrics**: Accuracy is used to assess forecasting performance over prediction windows.
    - **Tuned Hyperparameters**:
      - `num_layers`: Number of encoder/decoder layers.
      - `attention_heads`: Number of attention heads per layer.
      - `dropout_rate`: Dropout rate for regularization.
      - `learning_rate`: Learning rate for the optimizer.
-   - **Optimization Method**: Hyperparameters are tuned using a combination of grid search and validation sets to optimize forecasting accuracy.
+   - **Optimization Method**: Grid search is used to select the best hyperparameters by forecasting accuracy.
 
 ---
 
